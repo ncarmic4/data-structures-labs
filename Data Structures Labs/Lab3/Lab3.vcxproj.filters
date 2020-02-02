@@ -15,16 +15,23 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="statexam.cpp">
+    <ClCompile Include="Program2.1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stats.cpp">
+    <ClCompile Include="Program2.2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="stats.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="Program2.3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="thinker.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestThinker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="thinker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

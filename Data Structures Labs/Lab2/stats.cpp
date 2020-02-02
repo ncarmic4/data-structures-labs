@@ -1,9 +1,17 @@
+/*
+* Class: CS 3305 Section 01
+* Term: Spring 2020
+* Name: Nicholas Carmichael
+* Instructor: Deepa Muralidhar
+* Assignment: Lab 2
+*/
+
 #include <cstdlib>;
-#include <iostream>;
 #include "stats.h";
 
+// implementation of stats.h statistician class
+
 statistician::statistician() {
-	//make sure object is reset
 	reset();
 }
 
@@ -11,16 +19,16 @@ void statistician::next(double r) {
 	count++;
 	total += r;
 
-	//if there is only one number, it is both largest and tinyest
+	// if there is only one number, it is both largest and tinyest
 	if (count == 1) {
 		largest = r;
 		tinyest = r;
 	}
 
-	if (r >= largest)
+	if (r > largest)
 		largest = r;
 
-	if (r <= tinyest)
+	if (r < tinyest)
 		tinyest = r;
 }
 
