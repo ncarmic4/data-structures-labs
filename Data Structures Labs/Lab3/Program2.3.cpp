@@ -69,7 +69,7 @@ int main()
     int* p2 = &num2;
     cout << "Before invoking the swap4 function, p1 is "
         << p1 << " and p2 is " << p2 << endl;
-    // calll swap4, swap the pointers
+    // call swap4, swap the pointers
     swap4(p1, p2);
     cout << "After invoking the swap4 function, p1 is " << p1 <<
         " and p2 is " << p2 << endl;

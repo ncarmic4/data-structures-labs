@@ -63,4 +63,5 @@ int main(int argc, char **argv)
     std::cout << "Set [s3 + s] contains " << s3 << "(Test for the += operator)" <<std::endl;
     std::cout << " --> must contains [50 51 52 7 8 9 10 3 2 1 22]" << std::endl << std::endl;
     std::cout << "Done!" << std::endl;
+    return 0;
 }

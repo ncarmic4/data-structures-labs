@@ -3,7 +3,7 @@
 * Term: Spring 2020
 * Name: Nicholas Carmichael
 * Instructor: Deepa Muralidhar
-* Assignment: Lab 2
+* Assignment: Lab 4
 */
 
 #include <cstdlib>;
@@ -18,33 +18,53 @@ set::set(size_type initial_capacity) {
 }
 
 set::~set() {
-
+    delete[] data, capacity, used;
 }
 
 set::set(const set& s) {
-
+    capacity = s.capacity;
+    used = s.used;
+    // iteratively copy data
+    data = new value_type[capacity];
+    size_type index = 0;
+    while (index < used) {
+        data[index] = s.data[index];
+        index++;
+    }
 }
 
 set& set::operator= (const set& s) {
-    set newSet = s;
-    return newSet;
+    // self assignment check
+    if (this == &s)
+        return *this;
+
+    // remove any existing vars
+    delete[] data, capacity, used;
+    capacity = s.capacity;
+    used = s.used;
+
+    // iteratively copy data
+    data = new value_type[capacity];
+    for (int i = 0; i < used; i++) {
+        data[i] = s.data[i];
+    }
+
+    // return lvalue
+    return *this;
 }
 
 bool set::erase(const value_type& target) {
     size_type index = 0;
     while (index < used)
     {
-        std::cout << data[index] << " " << target;
         if (data[index] == target)
         {
             --used;
             data[index] = data[used];
             return true;
         }
-        else
-            ++index;
+        ++index;
     }
-
     return false;
 }
 
@@ -57,24 +77,34 @@ bool set::insert(const value_type& entry) {
 }
 
 void set::operator+=(const set& addend) {
+    // need to make sure there is enough capacity for max amount possible
+    value_type totalCapacity = addend.used + used;
+    if (totalCapacity > capacity) {
+        reserve(totalCapacity);
+    }
 
+    // union has all values, only once
+    size_type index = 0;
+    while (index < addend.used) {
+        if (!contains(addend.data[index])) {
+            data[used] = addend.data[index];
+            used++;
+        }
+        index++;
+    }
 }
 
 set::size_type set::size() const {
-    return capacity;
+    return used;
 }
 
 bool set::contains(const value_type& target) const {
-    int index = 0;
-    
-    while (index < used)
-    {
-        if (data[index] == target)
-        {
+    size_type index = 0;
+    while (index < used) {
+        if (data[index] == target) {
             return true;
         }
-        else
-            ++index;
+        index++;
     }
     return false;
 }
@@ -102,4 +132,3 @@ void set::reserve(size_type new_capacity) {
     data = larger_array;
     capacity = new_capacity;
 }
-
