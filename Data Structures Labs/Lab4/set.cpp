@@ -32,7 +32,6 @@ set& set::operator= (const set& s) {
 
 bool set::erase(const value_type& target) {
     size_type index = 0;
-    std::cout << "test";
     while (index < used)
     {
         std::cout << data[index] << " " << target;
