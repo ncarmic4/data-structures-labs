@@ -10,17 +10,25 @@
 #include <cstring>
 #include "set.h";
 
-// implementation of set.h set class
+// O(1)
+// precondition: there is an initial capacity
+// postcondition: empty set has been created
 set::set(size_type initial_capacity) {
     data = new value_type[initial_capacity];
     capacity = initial_capacity;
     used = 0;
 }
 
+// O(1)
+// precondition: object exists
+// postcondition: set has been deallocated
 set::~set() {
     delete[] data, capacity, used;
 }
 
+// O(n) because of memcpy
+// precondition: there is a source set to copy
+// postcondition: a copy of source has been created
 set::set(const set& s) {
     capacity = s.capacity;
     used = s.used;
@@ -33,6 +41,9 @@ set::set(const set& s) {
     }
 }
 
+// O(n)
+// precondition: there is a set to assign and a set to read from
+// postcondition: a new set has been initialized with based on source
 set& set::operator= (const set& s) {
     // self assignment check
     if (this == &s)
@@ -53,6 +64,9 @@ set& set::operator= (const set& s) {
     return *this;
 }
 
+// O(n)
+// precondition: object exists
+// postcondition: entry is not in the set
 bool set::erase(const value_type& target) {
     size_type index = 0;
     while (index < used)
@@ -68,6 +82,9 @@ bool set::erase(const value_type& target) {
     return false;
 }
 
+// O(1)
+// precondition: there is space in the array
+// postcondition: entry is in the set
 bool set::insert(const value_type& entry) {
     if (used == capacity)
         reserve(used + 1);
@@ -76,6 +93,9 @@ bool set::insert(const value_type& entry) {
     return true;
 }
 
+// O(n)
+// precondition: there is a addend
+// postcondition: union of sets has been created
 void set::operator+=(const set& addend) {
     // need to make sure there is enough capacity for max amount possible
     value_type totalCapacity = addend.used + used;
@@ -83,7 +103,7 @@ void set::operator+=(const set& addend) {
         reserve(totalCapacity);
     }
 
-    // union has all values, only once
+    // union has all values, each is unique
     size_type index = 0;
     while (index < addend.used) {
         if (!contains(addend.data[index])) {
@@ -94,10 +114,16 @@ void set::operator+=(const set& addend) {
     }
 }
 
+// O(1)
+// precondition: object exists
+// postcondition: number of elements in the set has been returned
 set::size_type set::size() const {
     return used;
 }
 
+// O(n^2) because of contains()
+// precondition: there is an array and value to check for
+// postcondition: whether entry is in the set has been returned
 bool set::contains(const value_type& target) const {
     size_type index = 0;
     while (index < used) {
@@ -109,6 +135,9 @@ bool set::contains(const value_type& target) const {
     return false;
 }
 
+// O(n)
+// precondition: set exists
+// postcondition: s has been displayed on output
 std::ostream& operator<<(std::ostream& output, const set& s) {
     for (int i = 0; i < s.used; i++) {
         output << s.data[i] << " ";
@@ -116,6 +145,9 @@ std::ostream& operator<<(std::ostream& output, const set& s) {
     return output;
 }
 
+// O(n) because of copy
+// precondition: there is a new capacity
+// postcondition: capacity has been reallocated and data has same values
 void set::reserve(size_type new_capacity) {
     value_type* larger_array;
     if (new_capacity == capacity) {
