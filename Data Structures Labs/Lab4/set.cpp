@@ -10,12 +10,14 @@
 #include <cstring>
 #include "set.h";
 
+
 // O(1)
 // precondition: there is an initial capacity
 // postcondition: empty set has been created
 set::set(size_type initial_capacity) {
     data = new value_type[initial_capacity];
     capacity = initial_capacity;
+
     used = 0;
 }
 
