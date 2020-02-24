@@ -25,15 +25,16 @@ sequence::sequence() {
 
 // copy constructor
 sequence::sequence(const sequence& source) {
-	node* next = source.head_ptr;
-	while (next != NULL) {
-		attach(next->data());
-		next = next->link();
-	}
+	*this = source;
 }
 
 sequence::~sequence() {
-	
+	cursor = head_ptr;
+	while (cursor != NULL) {
+		node* next = cursor->link();
+		delete cursor;
+		cursor = next;
+	}
 }
 
 // Postcondition: Current index set to start of sequence
@@ -149,20 +150,43 @@ void sequence::remove_current() {
 // Precondition: There is a source to copy
 // Postcondition: The source has been copied to this object
 void sequence::operator=(const sequence& source) {
-	many_nodes = source.many_nodes;
+	// self assignment check
+	if (this == &source)
+		return;
+
 	if (source.many_nodes == 0) {
-		head_ptr = NULL;
-		tail_ptr = NULL;
+		many_nodes = 0;
 		cursor = NULL;
 		precursor = NULL;
+		tail_ptr = NULL;
+		head_ptr = NULL;
 		return;
 	}
 
-	node* next = source.head_ptr;
-	while (next != NULL) {
-		attach(next->data());
-		next = next->link();
+	many_nodes = 1;
+	head_ptr = new node(source.head_ptr->data(), NULL);
+	cursor = head_ptr;
+	node* currentObj = source.head_ptr->link();
+
+	node* tmpPrecursor = NULL;
+	node* tmpCursor = NULL;
+
+	if (source.cursor == source.head_ptr)
+		tmpCursor = head_ptr;
+
+	while (currentObj != NULL) {
+		std::cout << currentObj->data();
+		attach(currentObj->data());
+
+		if (currentObj == source.precursor)
+			tmpPrecursor = cursor;
+		if (currentObj == source.cursor)
+			tmpCursor = cursor;
+
+		currentObj = currentObj->link();
 	}
+	cursor = tmpCursor;
+	precursor = tmpPrecursor;
 }
 
 // Precondition: is_item( ) returns true.
