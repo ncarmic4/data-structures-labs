@@ -3,13 +3,12 @@
 * Term: Spring 2020
 * Name: Nicholas Carmichael
 * Instructor: Deepa Muralidhar
-* Assignment: Lab 5
+* Assignment: Lab 6
 */
 
 #include "sequence3.h"
 #include <cstdlib>
 #include <iostream>
-#include <cstring>     // Provides memcpy.
 #include "node1.h"
 
 using namespace main_savitch_5;
@@ -25,10 +24,11 @@ sequence::sequence() {
 
 // copy constructor
 sequence::sequence(const sequence& source) {
-	*this = source;
+	*this = source; // we can just use assignment operator
 }
 
 sequence::~sequence() {
+	// traverse and delete each node
 	cursor = head_ptr;
 	while (cursor != NULL) {
 		node* next = cursor->link();
@@ -37,6 +37,7 @@ sequence::~sequence() {
 	}
 }
 
+// Precondition: at least 1 node
 // Postcondition: Current index set to start of sequence
 void sequence::start() {
 	if (many_nodes > 0) {
@@ -175,7 +176,6 @@ void sequence::operator=(const sequence& source) {
 		tmpCursor = head_ptr;
 
 	while (currentObj != NULL) {
-		std::cout << currentObj->data();
 		attach(currentObj->data());
 
 		if (currentObj == source.precursor)
