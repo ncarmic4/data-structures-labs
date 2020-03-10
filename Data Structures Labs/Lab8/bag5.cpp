@@ -121,6 +121,12 @@ void bag<Item>::insert(const Item& entry)
 
 template <class Item>
 void bag<Item>::print_value_range(const Item& x, const Item& y) {
+	cout << "bag: ";
+	print();
+
+	cout << "x = " << x << endl;
+	cout << "y = " << y << endl;
+
 	node<Item>* cursor = head_ptr;
 	bool hitFirstItem = false;
 	cout << "[ ";
@@ -142,9 +148,6 @@ void bag<Item>::print_value_range(const Item& x, const Item& y) {
 	}
 	
 	cout << "]" << endl;
-
-	cout << "x = " << x << endl;
-	cout << "y = " << y << endl;
 }
 
 template <class Item>
@@ -154,8 +157,7 @@ void bag<Item>::remove_repetitions() {
 		node<Item>* q = p;
 		while (q->link() != NULL) {
 			if (q->link()->data() == p->data()) {
-				list_remove(q);
-				//q->set_link(q->link()->link());
+				q->set_link(q->link()->link());
 			}
 			q = q->link();
 		}

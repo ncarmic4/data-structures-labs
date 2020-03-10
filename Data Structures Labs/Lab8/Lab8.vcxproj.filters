@@ -23,10 +23,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="node2.template">
+    <None Include="bag5.cpp">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="bag5.cpp">
+    <None Include="node2.cpp">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>

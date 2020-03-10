@@ -266,7 +266,7 @@ private:
 };
 
 
-#include "node2.template"
+#include "node2.cpp"
 
 
 #endif // NODE2_H

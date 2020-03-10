@@ -39,7 +39,11 @@ int main()
     b2.insert(4);
     b2.insert(3);
     b2.insert(2);
-    b2.insert(1);
+    b2.insert(7);
+    b2.insert(4);
+    b2.insert(3);
+    b2.insert(2);
+    b2.insert(7);
     cout << "Bag before removing repetitions: " << endl;
     b2.print();
     cout << "Bag after removing repetitions: " << endl;
